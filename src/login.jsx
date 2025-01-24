@@ -9,6 +9,7 @@ const LoginFlow = () => {
     const [error, setError] = useState('');
     const [orderResponse, setOrderResponse] = useState(null);
     const [orderReport, setOrderReport] = useState(null);
+    const [decryptedAccessToken, setDecryptedAccessToken] = useState(null);
     const [orderDetails, setOrderDetails] = useState({
         requestStatus: "New",
         ex: "NCM",
@@ -31,7 +32,7 @@ const LoginFlow = () => {
         tk: '',
     });
 
-    let decryptedAccessToken = null;
+
     let encryptedAccessToken = null;
 
     const headers = {
@@ -117,7 +118,7 @@ const LoginFlow = () => {
                 secretKey
             );
             console.log("Decrypted Data:", decryptedData);
-            decryptedAccessToken = decryptedData;
+
         } catch (err) {
             console.error("Error:", err.message);
         }
@@ -161,10 +162,11 @@ const LoginFlow = () => {
             if (!encryptedAccessToken) throw new Error('Access token not received.');
             console.log('Encrypted access token:', encryptedAccessToken);
 
-            decryptedAccessToken = await TBSAlgoEncryptDecrypt.gcmDecrypt(
+            const decryptedAccessToken = await TBSAlgoEncryptDecrypt.gcmDecrypt(
                 encryptedAccessToken,
                 secretKey
             );
+            setDecryptedAccessToken(decryptedAccessToken);
 
             setProfileData({ message: 'Login successful' });
             console.log('Login successful, decrypted access token:', decryptedAccessToken);
