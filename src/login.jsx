@@ -130,7 +130,7 @@ const LoginFlow = () => {
         try {
             console.log('Sending login request...');
             const loginResponse = await axios.post(
-                '/ms-algo-trading-authservice/login',
+                'https://uat-api-algo.tradebulls.in/ms-algo-trading-authservice/login',
                 {
                     username,
                     password,
@@ -149,7 +149,7 @@ const LoginFlow = () => {
 
             console.log('Sending 2FA request...');
             const login2FAResponse = await axios.post(
-                '/ms-algo-trading-authservice/login2faTotp',
+                'https://uat-api-algo.tradebulls.in/ms-algo-trading-authservice/login2faTotp',
                 {
                     payload: [{ logintoken, otp: '123456', authFlag: '0' }],
                 },
