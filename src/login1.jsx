@@ -137,7 +137,7 @@ const LoginFlow = () => {
                     clientId: 'tbsenterpriseweb',
                     appId: '1',
                     vendorName: 'MintMaster',
-                    state: 'Mint',
+                    state: 'MINT',
                 },
                 { headers }
             );
