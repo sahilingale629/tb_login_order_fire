@@ -32,6 +32,7 @@ const LoginFlow = () => {
     });
 
     let decryptedAccessToken = null;
+    let encryptedAccessToken = null;
 
     const headers = {
         'request-info': '{"rit":"123","cver": "1.0v","ch": "WEB","info":{}}',
@@ -112,9 +113,8 @@ const LoginFlow = () => {
     // Example usage
     (async () => {
         try {
-            const decryptedData = await TBSAlgoEncryptDecrypt.gcmDecrypt(
-                "pMsEDoWTLDmDCk1SpWT913pz4n22pykeXXhlRvLqkO-5gBVzZFRxo5ZQ8pqkpRrqO4iadfP5ZCGgNUBPt0DZzA==",
-                "id+qipZHEPff/jNJPlyjKObYKcM+JWqzYFGGGzJh+mc="
+            const decryptedData = await TBSAlgoEncryptDecrypt.gcmDecrypt(encryptedAccessToken,
+                secretKey
             );
             console.log("Decrypted Data:", decryptedData);
             decryptedAccessToken = decryptedData;
